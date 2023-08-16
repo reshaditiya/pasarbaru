@@ -1,9 +1,9 @@
-import StoreForm from './components/store-form';
+import Ownerform from './components/owner-form';
 
 export default function page() {
 	return (
 		<main>
-			<StoreForm />
+			<Ownerform />
 		</main>
 	);
 }
