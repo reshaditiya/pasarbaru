@@ -12,7 +12,7 @@ import {
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export default function SignInCard() {
-	const supabase = createClientComponentClient();
+	const supabase = createClientComponentClient<Database>();
 
 	async function handleSignin({
 		provider,
@@ -22,12 +22,9 @@ export default function SignInCard() {
 		await supabase.auth.signInWithOAuth({
 			provider: provider,
 			options: {
-				redirectTo: 'http://localhost:3000/auth/callback',
+				redirectTo: `${location.origin}/auth/callback`,
 			},
 		});
-	}
-	async function handleSignout() {
-		await supabase.auth.signOut();
 	}
 
 	return (

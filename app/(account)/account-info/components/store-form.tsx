@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -16,6 +15,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useEffect } from 'react';
 
 const storeFormSchema = z.object({
 	nama_toko: z
@@ -63,16 +64,31 @@ const storeFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof storeFormSchema>;
 
-// This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
-	// bio: 'I own a computer.',
-	// urls: [
-	// 	{ value: 'https://shadcn.com' },
-	// 	{ value: 'http://twitter.com/shadcn' },
-	// ],
-};
-
 export default function StoreForm() {
+	const supabase = createClientComponentClient();
+
+	const defaultValues: Partial<ProfileFormValues> = {
+		nama_toko: '',
+		kabupaten: '',
+		kecamatan: '',
+		desa: '',
+		alamat: '',
+		foto: '',
+	};
+
+	useEffect(() => {
+		async function getData() {
+			const userData = await supabase.auth.getUser();
+
+			if (userData.data.user) {
+				await supabase
+					.from('toko')
+					.select('nama_toko, kabupaten, kecamatan, desa, alamat, foto')
+					.eq('id', userData.data.user.id);
+			}
+		}
+	}, [supabase]);
+
 	const form = useForm<ProfileFormValues>({
 		resolver: zodResolver(storeFormSchema),
 		defaultValues,
@@ -88,6 +104,7 @@ export default function StoreForm() {
 				</pre>
 			),
 		});
+		form.reset();
 	}
 
 	return (
