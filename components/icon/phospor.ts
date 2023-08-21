@@ -1,3 +1,12 @@
-'use client';
+"use client";
 
-export { GoogleLogo, FacebookLogo, X } from '@phosphor-icons/react';
+export {
+  GoogleLogo,
+  FacebookLogo,
+  X,
+  Storefront,
+  User,
+  Check,
+  CaretRight,
+  Circle,
+} from "@phosphor-icons/react";

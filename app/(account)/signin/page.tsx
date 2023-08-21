@@ -13,7 +13,7 @@ export default async function page() {
 
 	if (session) redirect('/');
 	return (
-		<main className='flex justify-center items-center h-screen'>
+		<main className='flex justify-center items-center pt-40'>
 			<SignInCard />
 		</main>
 	);

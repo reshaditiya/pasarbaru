@@ -1,5 +1,5 @@
-import { Database as DB } from '@/lib/database.type';
+import { Database as DB } from "@/types/database.type";
 
 declare global {
-	type Database = DB;
+  type Database = DB;
 }
