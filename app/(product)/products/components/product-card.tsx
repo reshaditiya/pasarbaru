@@ -8,10 +8,10 @@ import {
 } from '@/components/ui/card';
 import Image from 'next/image';
 import ImagePlaceHolder from '@/public/image-placeholder.svg';
-import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { formatNumberTothousand } from '@/lib/utils';
 import DeleteProductButton from './delete-product-button';
+import { ProductFormButton } from './product-form-button';
 
 export default function ProductCard({
 	product,
@@ -20,43 +20,59 @@ export default function ProductCard({
 		id: number;
 		nama: string;
 		jenis: string;
-		harga_beli: number;
-		harga_jual: number;
+		satuan: string;
+		harga_beli: string;
+		harga_jual: string;
 		foto_url1: string;
+		foto_url2: string;
+		foto_url3: string;
 	};
 }) {
+	const { id: productId, ...productValues } = product;
+
 	return (
 		<Card className='w-full'>
 			<CardHeader>
 				<Image src={ImagePlaceHolder} alt='product image' />
-				<CardTitle>{product.nama}</CardTitle>
-				<CardDescription>{product.jenis}</CardDescription>
+				<CardTitle>{productValues.nama}</CardTitle>
+				<CardDescription>{productValues.jenis}</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<ul className='flex flex-col gap-2'>
 					<li className='flex justify-between'>
 						<span>Harga Beli:</span>
-						<span>{formatNumberTothousand(product.harga_beli)}</span>
+						<span>
+							{formatNumberTothousand(Number(productValues.harga_beli))}
+						</span>
 					</li>
 					<li className='flex justify-between'>
 						<span>Harga Jual:</span>
-						<span>{formatNumberTothousand(product.harga_jual)}</span>
+						<span>
+							{formatNumberTothousand(Number(productValues.harga_jual))}
+						</span>
 					</li>
 					<Separator />
 					<li className='flex justify-between'>
 						<span>Keuntungan:</span>
 						<span>
-							{formatNumberTothousand(product.harga_jual - product.harga_beli)}
+							{formatNumberTothousand(
+								Number(productValues.harga_jual) -
+									Number(productValues.harga_beli)
+							)}
 						</span>
 					</li>
 				</ul>
 			</CardContent>
-			<CardFooter className='flex gap-4 justify-end'>
+			<CardFooter className='flex gap-4 justify-end flex-wrap'>
 				<DeleteProductButton
-					productId={product.id}
-					productName={product.nama}
+					productId={productId}
+					productName={productValues.nama}
 				/>
-				<Button variant='secondary'>Edit</Button>
+				<ProductFormButton
+					type='edit'
+					productValues={productValues}
+					productId={productId}
+				/>
 			</CardFooter>
 		</Card>
 	);

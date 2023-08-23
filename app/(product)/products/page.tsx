@@ -7,8 +7,11 @@ export default async function page() {
 	const user = await supabase.auth.getUser();
 	const products = await supabase
 		.from('produk')
-		.select('id, nama, jenis, harga_beli, harga_jual, foto_url1')
-		.eq('id_toko', user.data.user?.id);
+		.select(
+			'id, nama, jenis, harga_beli, harga_jual, foto_url1, foto_url2, foto_url3, satuan'
+		)
+		.eq('id_toko', user.data.user?.id)
+		.order('created_at', { ascending: true });
 
 	return (
 		<section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-4 w-full'>

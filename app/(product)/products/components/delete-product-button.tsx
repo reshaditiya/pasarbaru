@@ -69,7 +69,7 @@ export default function DeleteProductButton({
 						yang terhapus tidak dapat dikembalikan!
 					</DialogDescription>
 				</DialogHeader>
-				<DialogFooter>
+				<DialogFooter className='flex gap-2'>
 					<Button variant='ghost' onClick={() => setIsOpen(false)}>
 						Batal
 					</Button>

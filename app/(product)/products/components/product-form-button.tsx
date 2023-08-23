@@ -66,19 +66,27 @@ const newProductSchema = z.object({
 
 type NewProductValues = z.infer<typeof newProductSchema>;
 
-export function NewProductButton() {
+export function ProductFormButton({
+	type,
+	productValues,
+	productId,
+}: {
+	type: 'new' | 'edit';
+	productValues?: NewProductValues;
+	productId?: number;
+}) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const router = useRouter();
 	const supabase = createClientComponentClient();
 	const defaultValues: Partial<NewProductValues> = {
-		nama: '',
-		foto_url1: '',
-		foto_url2: '',
-		foto_url3: '',
-		jenis: jenis[0],
-		satuan: '',
-		harga_beli: '0',
-		harga_jual: '0',
+		nama: productValues?.nama ?? '',
+		foto_url1: productValues?.foto_url1 ?? '',
+		foto_url2: productValues?.foto_url2 ?? '',
+		foto_url3: productValues?.foto_url3 ?? '',
+		jenis: productValues?.jenis ?? jenis[0],
+		satuan: productValues?.satuan ?? '',
+		harga_beli: String(productValues?.harga_beli) ?? '0',
+		harga_jual: String(productValues?.harga_jual) ?? '0',
 	};
 
 	const form = useForm<NewProductValues>({
@@ -89,19 +97,33 @@ export function NewProductButton() {
 
 	async function onSubmit(data: NewProductValues) {
 		const user = await supabase.auth.getUser();
+		let dbRes = undefined;
 
-		const { error } = await supabase.from('produk').insert([
-			{
-				nama: data.nama,
-				jenis: data.jenis,
-				id_toko: user.data.user?.id,
-				satuan: data.satuan,
-				harga_beli: Number(data.harga_beli),
-				harga_jual: Number(data.harga_jual),
-			},
-		]);
+		if (type === 'new') {
+			dbRes = await supabase.from('produk').insert([
+				{
+					nama: data.nama,
+					jenis: data.jenis,
+					id_toko: user.data.user?.id,
+					satuan: data.satuan,
+					harga_beli: Number(data.harga_beli),
+					harga_jual: Number(data.harga_jual),
+				},
+			]);
+		} else {
+			dbRes = await supabase
+				.from('produk')
+				.update({
+					nama: data.nama,
+					jenis: data.jenis,
+					satuan: data.satuan,
+					harga_beli: Number(data.harga_beli),
+					harga_jual: Number(data.harga_jual),
+				})
+				.eq('id', productId);
+		}
 
-		if (error) {
+		if (dbRes?.error) {
 			toast({
 				variant: 'destructive',
 				title: 'Data Gagal Disimpan!',
@@ -112,7 +134,7 @@ export function NewProductButton() {
 			toast({
 				description: 'Data produk berhasil disimpan!',
 			});
-			form.reset();
+			if (type === 'new') form.reset();
 			router.refresh();
 			setIsOpen(false);
 		}
@@ -121,10 +143,14 @@ export function NewProductButton() {
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen}>
 			<DialogTrigger asChild>
-				<Button variant='default'>
-					<Plus weight='bold' className='mr-2 h-4 w-4' />
-					Produk Baru
-				</Button>
+				{type === 'new' ? (
+					<Button variant='default'>
+						<Plus weight='bold' className='mr-2 h-4 w-4' />
+						Produk Baru
+					</Button>
+				) : (
+					<Button variant='secondary'>Edit</Button>
+				)}
 			</DialogTrigger>
 			<DialogContent className='sm:max-w-2xl'>
 				<DialogHeader>
