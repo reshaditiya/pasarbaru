@@ -11,6 +11,7 @@ import ImagePlaceHolder from '@/public/image-placeholder.svg';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { formatNumberTothousand } from '@/lib/utils';
+import DeleteProductButton from './delete-product-button';
 
 export default function ProductCard({
 	product,
@@ -51,12 +52,10 @@ export default function ProductCard({
 				</ul>
 			</CardContent>
 			<CardFooter className='flex gap-4 justify-end'>
-				<Button
-					variant='ghost'
-					className='text-red-800 hover:text-red-800 hover:bg-red-50'
-				>
-					Hapus
-				</Button>
+				<DeleteProductButton
+					productId={product.id}
+					productName={product.nama}
+				/>
 				<Button variant='secondary'>Edit</Button>
 			</CardFooter>
 		</Card>
