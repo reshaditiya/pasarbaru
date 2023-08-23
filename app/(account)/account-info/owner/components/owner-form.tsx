@@ -80,7 +80,7 @@ export default function OwnerForm({
 			});
 		} else {
 			toast({
-				description: 'Data pemilik toko berhasil di update!',
+				description: 'Data pemilik toko berhasil diperbarui!',
 			});
 			router.refresh();
 		}

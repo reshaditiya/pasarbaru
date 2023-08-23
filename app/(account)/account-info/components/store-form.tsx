@@ -63,7 +63,7 @@ const storeFormSchema = z.object({
 		}),
 });
 
-type ProfileFormValues = z.infer<typeof storeFormSchema>;
+type StoreFormValues = z.infer<typeof storeFormSchema>;
 
 export default function StoreForm({
 	store,
@@ -79,7 +79,7 @@ export default function StoreForm({
 }) {
 	const router = useRouter();
 	const supabase = createClientComponentClient();
-	const defaultValues: Partial<ProfileFormValues> = {
+	const defaultValues: Partial<StoreFormValues> = {
 		nama_toko: store?.nama_toko ?? '',
 		kabupaten: store?.kabupaten ?? '',
 		kecamatan: store?.kecamatan ?? '',
@@ -88,13 +88,13 @@ export default function StoreForm({
 		foto_url: '',
 	};
 
-	const form = useForm<ProfileFormValues>({
+	const form = useForm<StoreFormValues>({
 		resolver: zodResolver(storeFormSchema),
 		defaultValues,
 		mode: 'onChange',
 	});
 
-	async function onSubmit(data: ProfileFormValues) {
+	async function onSubmit(data: StoreFormValues) {
 		const user = await supabase.auth.getUser();
 		const { error } = await supabase
 			.from('toko')
@@ -117,7 +117,7 @@ export default function StoreForm({
 			});
 		} else {
 			toast({
-				description: 'Data toko berhasil di update!',
+				description: 'Data toko berhasil diperbaruo!',
 			});
 			router.refresh();
 		}

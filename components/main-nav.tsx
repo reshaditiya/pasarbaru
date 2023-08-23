@@ -14,11 +14,13 @@ export default async function MainNav() {
 
 	return (
 		<nav className='flex justify-between py-2 px-4 border-b h-16 items-center'>
-			<Link href='/' className='items-center space-x-2 flex'>
-				<Storefront className='w-6 h-6' weight='bold' />
-				<span className='font-bold sm:inline-block'>{siteConfig.name}</span>
-			</Link>
-			<NavItem />
+			<div className='flex gap-12 items-center'>
+				<Link href='/' className='items-center space-x-2 flex'>
+					<Storefront className='w-6 h-6' weight='bold' />
+					<span className='font-bold sm:inline-block'>{siteConfig.name}</span>
+				</Link>
+				<NavItem />
+			</div>
 			{session.data.session ? (
 				<UserAccountNav />
 			) : (
