@@ -92,15 +92,7 @@ const newSuplierSchema = z.object({
 			message: 'Email tidak boleh lebih dari 20 karakter',
 		})
 		.optional(),
-	web: z
-		.string()
-		.min(4, {
-			message: 'Web harus lebih dari 6 karakter',
-		})
-		.max(20, {
-			message: 'Web tidak boleh lebih dari 20 karakter',
-		})
-		.optional(),
+	web: z.string().optional(),
 });
 
 type NewSuplierValues = z.infer<typeof newSuplierSchema>;

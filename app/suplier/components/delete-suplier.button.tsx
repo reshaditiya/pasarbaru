@@ -46,7 +46,7 @@ export default function DeleteSuplierButton({
 			});
 		} else {
 			toast({
-				description: 'Data produk berhasil dihapus!',
+				description: 'Data suplier berhasil dihapus!',
 			});
 			router.refresh();
 			setIsOpen(false);
@@ -69,8 +69,8 @@ export default function DeleteSuplierButton({
 						Apakah anda yakin akan menghapus &ldquo;{suplierName}&rdquo;?
 					</DialogTitle>
 					<DialogDescription>
-						Pastikan produk yang akan dihapus adalah produk yang benar, produk
-						yang terhapus tidak dapat dikembalikan!
+						Pastikan suplier yang akan dihapus adalah suplier yang benar,
+						suplier yang terhapus tidak dapat dikembalikan!
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter className='flex gap-2'>
