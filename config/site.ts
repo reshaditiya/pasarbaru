@@ -11,4 +11,7 @@ export const siteConfig: SiteConfig = {
 	},
 };
 
-export const navItems: MainNavItem[] = [{ title: 'Produk', href: '/products' }];
+export const navItems: MainNavItem[] = [
+	{ title: 'Produk', href: '/products' },
+	{ title: 'Suplier', href: '/suplier' },
+];

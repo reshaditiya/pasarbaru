@@ -28,8 +28,8 @@ export interface Database {
           foto_url1?: string | null
           foto_url2?: string | null
           foto_url3?: string | null
-          harga_beli?: number
-          harga_jual?: number
+          harga_beli: number
+          harga_jual: number
           id?: number
           id_toko?: string | null
           jenis?: string | null
@@ -52,6 +52,58 @@ export interface Database {
         Relationships: [
           {
             foreignKeyName: "produk_id_toko_fkey"
+            columns: ["id_toko"]
+            referencedRelation: "toko"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      suplier: {
+        Row: {
+          alamat: string
+          created_at: string
+          desa: string
+          email: string | null
+          foto: string | null
+          id: number
+          id_toko: string
+          kabupaten: string
+          kecamatan: string
+          nama: string
+          no_hp: string
+          web: string | null
+        }
+        Insert: {
+          alamat: string
+          created_at?: string
+          desa: string
+          email?: string | null
+          foto?: string | null
+          id?: number
+          id_toko: string
+          kabupaten: string
+          kecamatan: string
+          nama: string
+          no_hp: string
+          web?: string | null
+        }
+        Update: {
+          alamat?: string
+          created_at?: string
+          desa?: string
+          email?: string | null
+          foto?: string | null
+          id?: number
+          id_toko?: string
+          kabupaten?: string
+          kecamatan?: string
+          nama?: string
+          no_hp?: string
+          web?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "suplier_id_toko_fkey"
             columns: ["id_toko"]
             referencedRelation: "toko"
             referencedColumns: ["id"]

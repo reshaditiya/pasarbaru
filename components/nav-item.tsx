@@ -11,13 +11,13 @@ export function NavItem() {
 	return (
 		<>
 			{navItems?.length ? (
-				<nav className='hidden gap-6 md:flex'>
+				<nav className='flex gap-6'>
 					{navItems?.map((item, index) => (
 						<Link
 							key={index}
 							href={item.disabled ? '#' : item.href}
 							className={cn(
-								'flex items-center text-lg font-medium transition-colors hover:text-gray-950/80 sm:text-sm',
+								'flex items-center font-medium transition-colors hover:text-gray-950/80 text-sm',
 								item.href.startsWith(`/${segment?.replace(/[()]/gi, '')}`)
 									? 'text-gray-950'
 									: 'text-gray-950/60',
