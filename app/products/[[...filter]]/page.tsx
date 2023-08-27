@@ -19,12 +19,9 @@ export default async function Page({
 		.eq('id_toko', user.data.user?.id)
 		.order('created_at', { ascending: true });
 
-	if (filterJenis && filterJenis !== 'all') {
+	if (filterJenis && filterJenis !== 'all')
 		queryProducts.eq('jenis', decodeURI(filterJenis));
-	}
-	if (filterKeyword) {
-		queryProducts.ilike('nama', `%${filterKeyword}%`);
-	}
+	if (filterKeyword) queryProducts.ilike('nama', `%${filterKeyword}%`);
 
 	const products = await queryProducts;
 
