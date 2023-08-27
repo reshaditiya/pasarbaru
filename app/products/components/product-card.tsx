@@ -12,7 +12,6 @@ import { Separator } from '@/components/ui/separator';
 import { formatNumberTothousand } from '@/lib/utils';
 import DeleteProductButton from './delete-product-button';
 import { ProductFormButton } from './product-form-button';
-import { jenis } from '@/config/product';
 
 export default function ProductCard({
 	product,
@@ -20,7 +19,7 @@ export default function ProductCard({
 	product: {
 		id: number;
 		nama: string;
-		jenis: (typeof jenis)[number];
+		jenis: string;
 		satuan: string;
 		harga_beli: number;
 		harga_jual: number;

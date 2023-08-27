@@ -49,7 +49,7 @@ const newProductSchema = z.object({
 	foto_url1: z.string().optional(),
 	foto_url2: z.string().optional(),
 	foto_url3: z.string().optional(),
-	jenis: z.enum(jenis),
+	jenis: z.string(),
 	satuan: z
 		.string()
 		.min(4, {
@@ -72,7 +72,7 @@ export function ProductFormButton({
 	type: 'new' | 'edit';
 	productValues?: {
 		nama: string;
-		jenis: (typeof jenis)[number];
+		jenis: string;
 		satuan: string;
 		harga_beli: number;
 		harga_jual: number;
