@@ -1,7 +1,6 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import ProductCard from '../components/product-card';
 import { cookies } from 'next/headers';
-import React from 'react';
 
 export default async function Page({
 	params,

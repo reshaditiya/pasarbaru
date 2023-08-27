@@ -1,3 +1,5 @@
+'use client';
+
 import {
 	Card,
 	CardContent,
@@ -14,7 +16,7 @@ import {
 } from '@/components/ui/select';
 import { jenis } from '@/config/product';
 import { Button } from '@/components/ui/button';
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwise } from '@/components/icon/phospor';
 import { Separator } from '@/components/ui/separator';
 import {
 	Form,
@@ -31,7 +33,7 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 
 const FilterSchema = z.object({
-	jenis: z.enum(jenis).or(z.literal('all')),
+	jenis: z.string(),
 	keyword: z.string().optional(),
 });
 
