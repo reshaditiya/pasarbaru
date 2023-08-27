@@ -49,7 +49,6 @@ export function FilterForm() {
 		defaultValues,
 		mode: 'onChange',
 	});
-	console.log(form.watch('jenis'));
 
 	function onSubmit(data: FilterValues) {
 		router.push(`/products/${data.jenis ?? 'all'}/${data.keyword ?? ''}`);
