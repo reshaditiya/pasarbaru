@@ -19,9 +19,9 @@ export interface Database {
           harga_jual: number
           id: number
           id_toko: string | null
-          jenis: string | null
+          jenis: string
           nama: string
-          satuan: string | null
+          satuan: string
         }
         Insert: {
           created_at?: string
@@ -32,9 +32,9 @@ export interface Database {
           harga_jual: number
           id?: number
           id_toko?: string | null
-          jenis?: string | null
+          jenis: string
           nama: string
-          satuan?: string | null
+          satuan: string
         }
         Update: {
           created_at?: string
@@ -45,9 +45,9 @@ export interface Database {
           harga_jual?: number
           id?: number
           id_toko?: string | null
-          jenis?: string | null
+          jenis?: string
           nama?: string
-          satuan?: string | null
+          satuan?: string
         }
         Relationships: [
           {

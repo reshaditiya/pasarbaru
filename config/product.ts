@@ -1,6 +1,6 @@
 export const jenis = [
-	'Sembako',
-	'Alat Mandi',
 	'Alat Kebersihan',
+	'Alat Mandi',
 	'Jajanan',
-].sort();
+	'Sembako',
+] as const;

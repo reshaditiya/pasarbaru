@@ -49,9 +49,7 @@ const newProductSchema = z.object({
 	foto_url1: z.string().optional(),
 	foto_url2: z.string().optional(),
 	foto_url3: z.string().optional(),
-	jenis: z.string({
-		required_error: 'Jenis produk harus dipilih.',
-	}),
+	jenis: z.enum(jenis),
 	satuan: z
 		.string()
 		.min(4, {
@@ -60,8 +58,8 @@ const newProductSchema = z.object({
 		.max(20, {
 			message: 'Satuan produk tidak boleh lebih dari 20 karakter',
 		}),
-	harga_beli: z.string(),
-	harga_jual: z.string(),
+	harga_beli: z.coerce.number(),
+	harga_jual: z.coerce.number(),
 });
 
 type NewProductValues = z.infer<typeof newProductSchema>;
@@ -72,7 +70,16 @@ export function ProductFormButton({
 	productId,
 }: {
 	type: 'new' | 'edit';
-	productValues?: NewProductValues;
+	productValues?: {
+		nama: string;
+		jenis: (typeof jenis)[number];
+		satuan: string;
+		harga_beli: number;
+		harga_jual: number;
+		foto_url1: string | null;
+		foto_url2: string | null;
+		foto_url3: string | null;
+	};
 	productId?: number;
 }) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -85,8 +92,8 @@ export function ProductFormButton({
 		foto_url3: productValues?.foto_url3 ?? '',
 		jenis: productValues?.jenis ?? jenis[0],
 		satuan: productValues?.satuan ?? '',
-		harga_beli: String(productValues?.harga_beli) ?? '0',
-		harga_jual: String(productValues?.harga_jual) ?? '0',
+		harga_beli: productValues?.harga_beli ?? 0,
+		harga_jual: productValues?.harga_jual ?? 0,
 	};
 
 	const form = useForm<NewProductValues>({
@@ -106,8 +113,8 @@ export function ProductFormButton({
 					jenis: data.jenis,
 					id_toko: user.data.user?.id,
 					satuan: data.satuan,
-					harga_beli: Number(data.harga_beli),
-					harga_jual: Number(data.harga_jual),
+					harga_beli: data.harga_beli,
+					harga_jual: data.harga_jual,
 				},
 			]);
 		} else {
@@ -117,8 +124,8 @@ export function ProductFormButton({
 					nama: data.nama,
 					jenis: data.jenis,
 					satuan: data.satuan,
-					harga_beli: Number(data.harga_beli),
-					harga_jual: Number(data.harga_jual),
+					harga_beli: data.harga_beli,
+					harga_jual: data.harga_jual,
 				})
 				.eq('id', productId);
 		}

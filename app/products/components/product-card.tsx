@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator';
 import { formatNumberTothousand } from '@/lib/utils';
 import DeleteProductButton from './delete-product-button';
 import { ProductFormButton } from './product-form-button';
+import { jenis } from '@/config/product';
 
 export default function ProductCard({
 	product,
@@ -19,13 +20,13 @@ export default function ProductCard({
 	product: {
 		id: number;
 		nama: string;
-		jenis: string;
+		jenis: (typeof jenis)[number];
 		satuan: string;
-		harga_beli: string;
-		harga_jual: string;
-		foto_url1: string;
-		foto_url2: string;
-		foto_url3: string;
+		harga_beli: number;
+		harga_jual: number;
+		foto_url1: string | null;
+		foto_url2: string | null;
+		foto_url3: string | null;
 	};
 }) {
 	const { id: productId, ...productValues } = product;
