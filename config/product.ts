@@ -3,4 +3,4 @@ export const jenis = [
 	'Alat Mandi',
 	'Jajanan',
 	'Sembako',
-] as const;
+].sort();
