@@ -1,5 +1,3 @@
-'use client';
-
 import { FilterForm } from './filter-form';
 import { ProductFormButton } from './product-form-button';
 

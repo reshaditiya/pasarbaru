@@ -10,4 +10,5 @@ export {
 	CaretRight,
 	Circle,
 	Plus,
+	ArrowsClockwise,
 } from '@phosphor-icons/react';
