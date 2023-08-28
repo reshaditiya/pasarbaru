@@ -12,9 +12,9 @@ export interface Database {
       produk: {
         Row: {
           created_at: string
-          foto_url1: string | null
-          foto_url2: string | null
-          foto_url3: string | null
+          foto1: string | null
+          foto2: string | null
+          foto3: string | null
           harga_beli: number
           harga_jual: number
           id: number
@@ -25,9 +25,9 @@ export interface Database {
         }
         Insert: {
           created_at?: string
-          foto_url1?: string | null
-          foto_url2?: string | null
-          foto_url3?: string | null
+          foto1?: string | null
+          foto2?: string | null
+          foto3?: string | null
           harga_beli: number
           harga_jual: number
           id?: number
@@ -38,9 +38,9 @@ export interface Database {
         }
         Update: {
           created_at?: string
-          foto_url1?: string | null
-          foto_url2?: string | null
-          foto_url3?: string | null
+          foto1?: string | null
+          foto2?: string | null
+          foto3?: string | null
           harga_beli?: number
           harga_jual?: number
           id?: number
@@ -116,7 +116,7 @@ export interface Database {
           created_at: string
           desa: string | null
           email: string
-          foto_url: string | null
+          foto: string | null
           id: string
           kabupaten: string | null
           kecamatan: string | null
@@ -129,7 +129,7 @@ export interface Database {
           created_at?: string
           desa?: string | null
           email?: string
-          foto_url?: string | null
+          foto?: string | null
           id: string
           kabupaten?: string | null
           kecamatan?: string | null
@@ -142,7 +142,7 @@ export interface Database {
           created_at?: string
           desa?: string | null
           email?: string
-          foto_url?: string | null
+          foto?: string | null
           id?: string
           kabupaten?: string | null
           kecamatan?: string | null

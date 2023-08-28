@@ -28,7 +28,7 @@ const storeFormSchema = z.object({
 		.max(20, {
 			message: 'Nama toko tidak boleh lebih dari 20 karakter',
 		}),
-	foto_url: z.string().optional(),
+	foto: z.string().optional(),
 	kabupaten: z
 		.string()
 		.min(4, {
@@ -74,7 +74,7 @@ export default function StoreForm({
 		kecamatan: string | null;
 		desa: string | null;
 		alamat: string | null;
-		foto_url: string | null;
+		foto: string | null;
 	} | null;
 }) {
 	const router = useRouter();
@@ -85,7 +85,7 @@ export default function StoreForm({
 		kecamatan: store?.kecamatan ?? '',
 		desa: store?.desa ?? '',
 		alamat: store?.alamat ?? '',
-		foto_url: '',
+		foto: '',
 	};
 
 	const form = useForm<StoreFormValues>({
@@ -104,7 +104,7 @@ export default function StoreForm({
 				kecamatan: data.kecamatan,
 				desa: data.desa,
 				alamat: data.alamat,
-				foto_url: data.foto_url,
+				foto: data.foto,
 			})
 			.eq('id', user.data.user?.id);
 
@@ -141,7 +141,7 @@ export default function StoreForm({
 				/>
 				<FormField
 					control={form.control}
-					name='foto_url'
+					name='foto'
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Foto</FormLabel>

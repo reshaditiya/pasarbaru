@@ -23,9 +23,9 @@ export default function ProductCard({
 		satuan: string;
 		harga_beli: number;
 		harga_jual: number;
-		foto_url1: string | null;
-		foto_url2: string | null;
-		foto_url3: string | null;
+		foto1: string | null;
+		foto2: string | null;
+		foto3: string | null;
 	};
 }) {
 	const { id: productId, ...productValues } = product;

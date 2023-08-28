@@ -22,7 +22,7 @@ export default function UserAccountNav() {
 		| {
 				nama_toko: string | null;
 				email: string | null;
-				foto_url: string | null;
+				foto: string | null;
 		  }
 		| undefined
 	>(undefined);
@@ -32,7 +32,7 @@ export default function UserAccountNav() {
 			const authUser = await supabase.auth.getUser();
 			supabase
 				.from('toko')
-				.select('nama_toko, email, foto_url')
+				.select('nama_toko, email, foto')
 				.eq('id', authUser.data.user?.id)
 				.single()
 				.then((res) => {
@@ -48,7 +48,7 @@ export default function UserAccountNav() {
 			<DropdownMenuTrigger>
 				<Avatar className='w-10 h-10 rounded-full overflow-hidden inline-block'>
 					<AvatarImage
-						src={userData?.foto_url ?? ''}
+						src={userData?.foto ?? ''}
 						alt={userData?.nama_toko ?? ''}
 					/>
 					<AvatarFallback>

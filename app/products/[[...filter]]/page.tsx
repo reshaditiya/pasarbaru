@@ -13,7 +13,7 @@ export default async function Page({
 	const queryProducts = supabase
 		.from('produk')
 		.select(
-			'id, nama, jenis, harga_beli, harga_jual, foto_url1, foto_url2, foto_url3, satuan'
+			'id, nama, jenis, harga_beli, harga_jual, foto1, foto2, foto3, satuan'
 		)
 		.eq('id_toko', user.data.user?.id)
 		.order('created_at', { ascending: true });

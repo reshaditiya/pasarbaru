@@ -8,7 +8,7 @@ export default async function page() {
 	const user = await supabase.auth.getUser();
 	const store = await supabase
 		.from('toko')
-		.select('nama_toko, kabupaten, kecamatan, desa, alamat, foto_url')
+		.select('nama_toko, kabupaten, kecamatan, desa, alamat, foto')
 		.eq('id', user.data.user?.id)
 		.single();
 

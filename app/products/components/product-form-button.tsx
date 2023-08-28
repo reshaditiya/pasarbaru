@@ -46,9 +46,9 @@ const newProductSchema = z.object({
 		.max(20, {
 			message: 'Nama toko tidak boleh lebih dari 20 karakter',
 		}),
-	foto_url1: z.string().optional(),
-	foto_url2: z.string().optional(),
-	foto_url3: z.string().optional(),
+	foto1: z.any(),
+	foto2: z.string().optional(),
+	foto3: z.string().optional(),
 	jenis: z.string(),
 	satuan: z
 		.string()
@@ -76,9 +76,9 @@ export function ProductFormButton({
 		satuan: string;
 		harga_beli: number;
 		harga_jual: number;
-		foto_url1: string | null;
-		foto_url2: string | null;
-		foto_url3: string | null;
+		foto1: string | null;
+		foto2: string | null;
+		foto3: string | null;
 	};
 	productId?: number;
 }) {
@@ -87,9 +87,9 @@ export function ProductFormButton({
 	const supabase = createClientComponentClient();
 	const defaultValues: Partial<NewProductValues> = {
 		nama: productValues?.nama ?? '',
-		foto_url1: productValues?.foto_url1 ?? '',
-		foto_url2: productValues?.foto_url2 ?? '',
-		foto_url3: productValues?.foto_url3 ?? '',
+		foto1: productValues?.foto1 ?? '',
+		foto2: productValues?.foto2 ?? '',
+		foto3: productValues?.foto3 ?? '',
 		jenis: productValues?.jenis ?? jenis[0],
 		satuan: productValues?.satuan ?? '',
 		harga_beli: productValues?.harga_beli ?? 0,
@@ -128,6 +128,7 @@ export function ProductFormButton({
 					harga_jual: data.harga_jual,
 				})
 				.eq('id', productId);
+			console.log(data.foto1);
 		}
 
 		if (dbRes?.error) {
@@ -186,12 +187,20 @@ export function ProductFormButton({
 						/>
 						<FormField
 							control={form.control}
-							name='foto_url1'
+							name='foto1'
 							render={({ field }) => (
 								<FormItem className='col-start-1'>
 									<FormLabel>Foto 1</FormLabel>
 									<FormControl>
-										<Input type='file' {...field} className='w-full h-24' />
+										<Input
+											type='file'
+											{...field}
+											value={field.value.filename}
+											onChange={(event) => {
+												return field.onChange(event.target.files);
+											}}
+											className='w-full h-24'
+										/>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -199,7 +208,7 @@ export function ProductFormButton({
 						/>
 						<FormField
 							control={form.control}
-							name='foto_url2'
+							name='foto2'
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Foto 2</FormLabel>
@@ -212,7 +221,7 @@ export function ProductFormButton({
 						/>
 						<FormField
 							control={form.control}
-							name='foto_url3'
+							name='foto3'
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Foto 3</FormLabel>
