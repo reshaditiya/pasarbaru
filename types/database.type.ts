@@ -18,7 +18,7 @@ export interface Database {
           harga_beli: number
           harga_jual: number
           id: number
-          id_toko: string | null
+          id_toko: string
           jenis: string
           nama: string
           satuan: string
@@ -31,7 +31,7 @@ export interface Database {
           harga_beli: number
           harga_jual: number
           id?: number
-          id_toko?: string | null
+          id_toko: string
           jenis: string
           nama: string
           satuan: string
@@ -44,7 +44,7 @@ export interface Database {
           harga_beli?: number
           harga_jual?: number
           id?: number
-          id_toko?: string | null
+          id_toko?: string
           jenis?: string
           nama?: string
           satuan?: string
