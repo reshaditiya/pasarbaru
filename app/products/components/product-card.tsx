@@ -18,6 +18,7 @@ export default function ProductCard({
 }: {
   product: {
     id: number;
+    id_toko: string;
     nama: string;
     jenis: string;
     satuan: string;
@@ -28,7 +29,7 @@ export default function ProductCard({
     foto3: string | null;
   };
 }) {
-  const { id: productId, ...productValues } = product;
+  const { id: productId, id_toko, ...productValues } = product;
 
   return (
     <Card className="w-full">
@@ -72,6 +73,7 @@ export default function ProductCard({
       </CardContent>
       <CardFooter className="flex flex-wrap justify-end gap-4">
         <DeleteProductButton
+          userId={id_toko}
           productId={productId}
           productName={productValues.nama}
         />
