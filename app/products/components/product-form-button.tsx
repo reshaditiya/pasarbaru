@@ -280,12 +280,13 @@ export function ProductFormButton({
             harga_jual: data.harga_jual,
           },
         ])
-        .select();
+        .select()
+        .single();
 
       if (dbRes.data) {
         const { dbFoto1, dbFoto2, dbFoto3 } = await uploadPhotos({
           user,
-          productId: dbRes.data[0].id,
+          productId: dbRes.data.id,
           foto1,
           foto2,
           foto3,
@@ -298,7 +299,7 @@ export function ProductFormButton({
             foto2: dbFoto2?.path,
             foto3: dbFoto3?.path,
           })
-          .eq('id', dbRes.data[0].id);
+          .eq('id', dbRes.data.id);
       }
     } else {
       if (productId) {
