@@ -58,7 +58,9 @@ export function FilterForm() {
   );
 }
 
-export function FilterFormPopover({ ...props }) {
+export function FilterFormPopover(
+  props: React.HTMLAttributes<HTMLButtonElement>,
+) {
   return (
     <Popover>
       <PopoverTrigger {...props} asChild>
@@ -73,7 +75,7 @@ export function FilterFormPopover({ ...props }) {
   );
 }
 
-export function FilterFormCard({ ...props }) {
+export function FilterFormCard(props: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter();
   const form = useForm<FilterValues>({
     resolver: zodResolver(FilterSchema),
