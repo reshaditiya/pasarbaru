@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { FacebookLogo, GoogleLogo } from "@/components/icon/phospor";
+import { Button } from '@/components/ui/button';
+import { FacebookLogo, GoogleLogo } from '@/components/icon/phospor';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+} from '@/components/ui/card';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export default function SignInCard() {
   const supabase = createClientComponentClient<Database>();
@@ -17,7 +17,7 @@ export default function SignInCard() {
   async function handleSignin({
     provider,
   }: {
-    provider: "google" | "facebook";
+    provider: 'google' | 'facebook';
   }) {
     await supabase.auth.signInWithOAuth({
       provider: provider,
@@ -35,17 +35,17 @@ export default function SignInCard() {
           Silahkan login melalui layanan yang tersedia untuk mengakses aplikasi.
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex gap-4 flex-wrap">
+      <CardContent className="flex flex-wrap gap-4">
         <Button
           variant="outline"
-          onClick={() => handleSignin({ provider: "google" })}
+          onClick={() => handleSignin({ provider: 'google' })}
         >
           <GoogleLogo className="mr-2 h-4 w-4" weight="bold" />
           Google
         </Button>
         <Button
           variant="outline"
-          onClick={() => handleSignin({ provider: "facebook" })}
+          onClick={() => handleSignin({ provider: 'facebook' })}
         >
           <FacebookLogo className="mr-2 h-4 w-4" weight="bold" />
           Facebook

@@ -6,15 +6,15 @@ import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 export default async function page() {
-	const supabase = createServerComponentClient<Database>({ cookies });
-	const {
-		data: { session },
-	} = await supabase.auth.getSession();
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-	if (session) redirect('/');
-	return (
-		<main className='flex justify-center items-center pt-40'>
-			<SignInCard />
-		</main>
-	);
+  if (session) redirect('/');
+  return (
+    <main className="flex items-center justify-center pt-40">
+      <SignInCard />
+    </main>
+  );
 }

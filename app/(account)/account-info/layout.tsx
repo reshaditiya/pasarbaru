@@ -1,21 +1,21 @@
-import { Metadata } from "next";
-import { Separator } from "@/components/ui/separator";
-import SidebarNav from "./components/sidebar-nav";
-import withAuth from "@/components/account/with-auth";
+import { Metadata } from 'next';
+import { Separator } from '@/components/ui/separator';
+import SidebarNav from './components/sidebar-nav';
+import withAuth from '@/components/account/with-auth';
 
 export const metadata: Metadata = {
-  title: "Forms",
-  description: "Advanced form example using react-hook-form and Zod.",
+  title: 'Forms',
+  description: 'Advanced form example using react-hook-form and Zod.',
 };
 
 const sidebarNavItems = [
   {
-    title: "Data Toko",
-    href: "/account-info",
+    title: 'Data Toko',
+    href: '/account-info',
   },
   {
-    title: "Data Pemilik",
-    href: "/account-info/owner",
+    title: 'Data Pemilik',
+    href: '/account-info/owner',
   },
 ];
 
