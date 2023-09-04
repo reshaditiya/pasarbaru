@@ -12,4 +12,5 @@ export {
   Plus,
   ArrowsClockwise,
   Sliders,
+  CameraPlus,
 } from '@phosphor-icons/react';
