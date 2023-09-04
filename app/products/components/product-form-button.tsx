@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Plus } from '@/components/icon/phospor';
+import { CameraPlus, Plus } from '@/components/icon/phospor';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
@@ -40,6 +40,7 @@ import { imageCompressOptions } from '@/config/site';
 import imageCompression from 'browser-image-compression';
 import { UserResponse } from '@supabase/supabase-js';
 import { fileValidation } from '@/config/site';
+import { InputImg } from '@/components/input-image';
 
 const newProductSchema = z.object({
   nama: z
@@ -385,15 +386,9 @@ export function ProductFormButton({
                 <FormItem className="col-start-1">
                   <FormLabel>Foto 1</FormLabel>
                   <FormControl>
-                    <Input
-                      type="file"
-                      {...field}
-                      value={field.value.filename}
-                      onChange={(event) => {
-                        return field.onChange(event.target.files);
-                      }}
-                      className="h-24 w-full"
-                    />
+                    <InputImg id="foto1" field={field}>
+                      <CameraPlus className="h-6 w-6" />
+                    </InputImg>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -406,15 +401,9 @@ export function ProductFormButton({
                 <FormItem>
                   <FormLabel>Foto 2</FormLabel>
                   <FormControl>
-                    <Input
-                      type="file"
-                      {...field}
-                      value={field.value.filename}
-                      onChange={(event) => {
-                        return field.onChange(event.target.files);
-                      }}
-                      className="h-24 w-full"
-                    />
+                    <InputImg id="foto2" field={field}>
+                      <CameraPlus className="h-6 w-6" />
+                    </InputImg>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -427,15 +416,9 @@ export function ProductFormButton({
                 <FormItem>
                   <FormLabel>Foto 3</FormLabel>
                   <FormControl>
-                    <Input
-                      type="file"
-                      {...field}
-                      value={field.value.filename}
-                      onChange={(event) => {
-                        return field.onChange(event.target.files);
-                      }}
-                      className="h-24 w-full"
-                    />
+                    <InputImg id="foto3" field={field}>
+                      <CameraPlus className="h-6 w-6" />
+                    </InputImg>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
