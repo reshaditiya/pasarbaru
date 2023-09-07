@@ -12,6 +12,7 @@ import { formatNumberTothousand } from '@/lib/utils';
 import DeleteProductButton from './delete-product-button';
 import { ProductFormButton } from './product-form-button';
 import { siteSource } from '@/config/site';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 export default function ProductCard({
   product,
@@ -34,14 +35,17 @@ export default function ProductCard({
   return (
     <Card className="w-full">
       <CardHeader>
-        <figure className="relative h-40 w-full overflow-hidden rounded-md">
+        <AspectRatio
+          ratio={3 / 2}
+          className="w-full overflow-hidden rounded-md"
+        >
           <Image
             src={siteSource.getProductImg(productValues.foto1)}
             alt="product image"
             className="object-cover"
             fill
           />
-        </figure>
+        </AspectRatio>
         <CardTitle>{productValues.nama}</CardTitle>
         <CardDescription>{productValues.jenis}</CardDescription>
       </CardHeader>

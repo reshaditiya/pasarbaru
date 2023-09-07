@@ -31,12 +31,18 @@ export function InputImg({
       {...props}
     >
       {image ? (
-        <Image
-          src={image}
-          alt={id}
-          fill
-          className="w-fill h-fill group-hover: object-cover"
-        />
+        <div className="group">
+          <div className="absolute inset-0 hidden flex-col items-center justify-center gap-1 text-white transition group-hover:flex group-hover:bg-gray-900/50">
+            {children}
+            <span className="text-xs">Upload File</span>
+          </div>
+          <Image
+            src={image}
+            alt={id}
+            fill
+            className="w-fill h-fill -z-10 object-cover"
+          />
+        </div>
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 group-hover:bg-gray-50">
           {children}

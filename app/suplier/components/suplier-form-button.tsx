@@ -29,6 +29,7 @@ import { ToastAction } from '@/components/ui/toast';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
+import { fileValidation } from '@/config/site';
 
 const newSuplierSchema = z.object({
   nama: z
@@ -71,7 +72,19 @@ const newSuplierSchema = z.object({
     .max(30, {
       message: 'Kecamatan tidak boleh lebih dari 30 karakter',
     }),
-  foto: z.string().optional(),
+  foto: z
+    .any()
+    .refine((file) => {
+      return fileValidation.img.type.has(file[0]?.type);
+    }, 'File harus berupa gambar')
+    .refine(
+      (file) => {
+        return file[0]?.size < fileValidation.img.size;
+      },
+      `File harus kurang dari ${fileValidation.img.size / 100000}`,
+    )
+    .optional()
+    .or(z.literal('')),
   no_hp: z
     .string()
     .min(12, {
@@ -142,20 +155,39 @@ export function SuplierFormButton({
     let dbRes = undefined;
 
     if (type === 'new') {
-      dbRes = await supabase.from('suplier').insert([
-        {
-          id_toko: user.data.user?.id,
-          nama: data.nama,
-          alamat: data.alamat,
-          kabupaten: data.kabupaten,
-          kecamatan: data.kecamatan,
-          desa: data.desa,
-          foto: data.foto,
-          no_hp: data.no_hp,
-          email: data.email,
-          web: data.web,
-        },
-      ]);
+      dbRes = await supabase
+        .from('suplier')
+        .insert([
+          {
+            id_toko: user.data.user?.id,
+            nama: data.nama,
+            alamat: data.alamat,
+            kabupaten: data.kabupaten,
+            kecamatan: data.kecamatan,
+            desa: data.desa,
+            no_hp: data.no_hp,
+            email: data.email,
+            web: data.web,
+          },
+        ])
+        .select()
+        .single();
+
+      if (dbRes?.data) {
+        const { data: dbFoto } = await supabase.storage
+          .from('suplier')
+          .upload(`${user.data.user?.id}/${dbRes.data.id}_1.jpg`, data.foto, {
+            cacheControl: '3600',
+            upsert: false,
+          });
+
+        dbRes = await supabase
+          .from('suplier')
+          .update({
+            foto: dbFoto,
+          })
+          .eq('id', dbRes.data.id);
+      }
     } else {
       dbRes = await supabase
         .from('suplier')
@@ -280,7 +312,15 @@ export function SuplierFormButton({
                 <FormItem>
                   <FormLabel>Foto</FormLabel>
                   <FormControl>
-                    <Input type="file" {...field} className="text-right" />
+                    <Input
+                      type="file"
+                      {...field}
+                      className="text-right"
+                      value={field.value.filename}
+                      onChange={(event) => {
+                        return field.onChange(event.target.files);
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -54,10 +54,12 @@ const newProductSchema = z.object({
   foto1: z
     .any()
     .refine((file) => {
+      if (typeof file === 'string' && file !== '') return true;
       return fileValidation.img.type.has(file[0]?.type);
     }, 'File harus berupa gambar')
     .refine(
       (file) => {
+        if (typeof file === 'string' && file !== '') return true;
         return file[0]?.size < fileValidation.img.size;
       },
       `File harus kurang dari ${fileValidation.img.size / 100000}`,
@@ -65,10 +67,12 @@ const newProductSchema = z.object({
   foto2: z
     .any()
     .refine((file) => {
+      if (typeof file === 'string' && file !== '') return true;
       return fileValidation.img.type.has(file[0]?.type);
     }, 'File harus berupa gambar')
     .refine(
       (file) => {
+        if (typeof file === 'string' && file !== '') return true;
         return file[0]?.size < fileValidation.img.size;
       },
       `File harus kurang dari ${fileValidation.img.size / 100000}`,
@@ -78,10 +82,12 @@ const newProductSchema = z.object({
   foto3: z
     .any()
     .refine((file) => {
+      if (typeof file === 'string' && file !== '') return true;
       return fileValidation.img.type.has(file[0]?.type);
     }, 'File harus berupa gambar')
     .refine(
       (file) => {
+        if (typeof file === 'string' && file !== '') return true;
         return file[0]?.size < fileValidation.img.size;
       },
       `File harus kurang dari ${fileValidation.img.size / 100000}`,
@@ -150,9 +156,9 @@ export function ProductFormButton({
   }: {
     user: UserResponse;
     productId: number;
-    foto1: File;
-    foto2: File;
-    foto3: File;
+    foto1: File | false;
+    foto2: File | false;
+    foto3: File | false;
   }) {
     let dbFoto1 = undefined;
     let dbFoto2 = undefined;
@@ -200,9 +206,9 @@ export function ProductFormButton({
   }: {
     user: UserResponse;
     productId: number;
-    foto1: File;
-    foto2: File;
-    foto3: File;
+    foto1: File | false;
+    foto2: File | false;
+    foto3: File | false;
   }) {
     let dbFoto1 = undefined;
     let dbFoto2 = undefined;
@@ -259,13 +265,13 @@ export function ProductFormButton({
     const user = await supabase.auth.getUser();
     let dbRes = undefined;
     const foto1 =
-      data.foto1[0] &&
+      typeof data.foto1 !== 'string' &&
       (await imageCompression(data.foto1[0], imageCompressOptions));
     const foto2 =
-      data.foto2[0] &&
+      typeof data.foto2 !== 'string' &&
       (await imageCompression(data.foto2[0], imageCompressOptions));
     const foto3 =
-      data.foto3[0] &&
+      typeof data.foto3 !== 'string' &&
       (await imageCompression(data.foto3[0], imageCompressOptions));
 
     if (type === 'new') {
