@@ -116,7 +116,7 @@ export interface Database {
           created_at: string
           desa: string | null
           email: string
-          foto: string | null
+          foto: string
           id: string
           kabupaten: string | null
           kecamatan: string | null
@@ -129,7 +129,7 @@ export interface Database {
           created_at?: string
           desa?: string | null
           email?: string
-          foto?: string | null
+          foto?: string
           id: string
           kabupaten?: string | null
           kecamatan?: string | null
@@ -142,7 +142,7 @@ export interface Database {
           created_at?: string
           desa?: string | null
           email?: string
-          foto?: string | null
+          foto?: string
           id?: string
           kabupaten?: string | null
           kecamatan?: string | null
