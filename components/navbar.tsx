@@ -7,6 +7,7 @@ import { NavbarItem } from './navbar-item';
 import { cookies } from 'next/headers';
 import { Button } from './ui/button';
 import { ShoppingBag } from 'lucide-react';
+import MobileNav from './mobile-nav';
 
 export default async function Navbar() {
   const supabase = createServerComponentClient({ cookies });
@@ -14,11 +15,14 @@ export default async function Navbar() {
 
   return (
     <nav className="flex h-16 items-center border-b px-4 py-2">
-      <Link href="/" className="flex items-center space-x-2">
-        <ShoppingBag className="h-5 w-5" strokeWidth={2.5} />
-        <span className="font-bold sm:inline-block">{siteConfig.name}</span>
-      </Link>
-      <NavbarItem className="ml-16" />
+      <MobileNav />
+      <div className="hidden md:flex md:items-center">
+        <Link href="/" className="flex items-center space-x-2">
+          <ShoppingBag className="h-5 w-5" strokeWidth={2.5} />
+          <span className="font-bold sm:inline-block">{siteConfig.name}</span>
+        </Link>
+        <NavbarItem className="ml-8" />
+      </div>
       {session.data.session ? (
         <UserAccountNav className="ml-auto" />
       ) : (

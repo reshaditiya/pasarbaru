@@ -3,25 +3,47 @@ import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { navItems } from '@/config/site';
+import { Button } from './ui/button';
 
-export function NavbarItem({ className }: { className: string }) {
+type NavbarItemProps = {
+  variant?: 'mobile' | 'desktop';
+  className?: string;
+};
+
+export function NavbarItem({
+  variant = 'desktop',
+  className,
+}: NavbarItemProps) {
   const segment = useSelectedLayoutSegment();
 
   return (
-    <nav className={cn('flex gap-6', className)}>
+    <nav
+      className={cn(
+        'flex gap-4',
+        className,
+        variant === 'mobile' && 'flex-col',
+      )}
+    >
       {navItems?.map((item) => (
-        <Link
+        <Button
           key={item.href}
-          href={item.href}
-          className={cn(
-            'text-sm font-medium transition-colors hover:text-primary text-primary',
-            item.href.startsWith(`/${segment?.replace(/[()]/gi, '')}`)
-              ? 'text-primary'
-              : 'text-primary/60',
-          )}
+          variant="link"
+          size="sm"
+          className="justify-start"
+          asChild
         >
-          {item.label}
-        </Link>
+          <Link
+            href={item.href}
+            className={cn(
+              'text-sm font-medium text-primary transition-colors hover:text-primary',
+              item.href.startsWith(`/${segment?.replace(/[()]/gi, '')}`)
+                ? 'text-primary'
+                : 'text-primary/60',
+            )}
+          >
+            {item.label}
+          </Link>
+        </Button>
       ))}
     </nav>
   );
