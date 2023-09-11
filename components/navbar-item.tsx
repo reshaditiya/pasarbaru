@@ -36,6 +36,7 @@ export function NavbarItem({
             href={item.href}
             className={cn(
               'text-sm font-medium text-primary transition-colors hover:text-primary',
+              variant === 'mobile' && 'text-base',
               item.href.startsWith(`/${segment?.replace(/[()]/gi, '')}`)
                 ? 'text-primary'
                 : 'text-primary/60',
