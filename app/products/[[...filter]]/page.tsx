@@ -30,13 +30,13 @@ export default async function Page({
   if (products.data?.length === 0)
     return (
       <EmptyState
-        className="mt-32 w-full text-muted-foreground lg:my-auto"
+        className="mt-32 w-3/4 text-muted-foreground lg:my-auto"
         title="Produk Kosong!"
         description="Tidak ada produk yang tersedia silahkan menambahkan produk untuk menampilkannya."
       />
     );
   return (
-    <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+    <section className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:ml-6 lg:mt-0 lg:w-3/4">
       {products.data?.map((product) => (
         <ProductCard product={product} key={product.id} />
       ))}
