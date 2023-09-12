@@ -1,7 +1,6 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -33,7 +32,7 @@ export default function MobileNav({ className }: { className?: string }) {
           </SheetTitle>
           <Separator />
         </SheetHeader>
-        <NavbarItem variant="mobile" className="ml-4 mt-4" />
+        <NavbarItem className="ml-4 mt-4" />
       </SheetContent>
     </Sheet>
   );
