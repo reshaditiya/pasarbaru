@@ -10,7 +10,7 @@ export const siteConfig = {
 } as const;
 
 export const navItems = [
-  { label: 'Produk', href: '/products' },
+  { label: 'Produk', href: '/product' },
   { label: 'Suplier', href: '/suplier' },
 ];
 
