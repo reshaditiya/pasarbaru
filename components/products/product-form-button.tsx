@@ -2,14 +2,14 @@
 
 import { Button } from '@/components/ui/button';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { toast } from '@/components/ui/use-toast';
 import {
   Form,
@@ -42,6 +42,8 @@ import { fileValidation } from '@/config/site';
 import { InputImg } from '@/components/input-img';
 import { Database } from '@/types/supabase';
 import { Plus } from 'lucide-react';
+import { Separator } from '../ui/separator';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 const newProductSchema = z.object({
   nama: z
@@ -110,11 +112,7 @@ const newProductSchema = z.object({
 
 type NewProductValues = z.infer<typeof newProductSchema>;
 
-export function ProductFormButton({
-  type,
-  productValues,
-  productId,
-}: {
+type ProductFormButtonProps = {
   type: 'new' | 'edit';
   productValues?: {
     nama: string;
@@ -127,7 +125,14 @@ export function ProductFormButton({
     foto3: string | null;
   };
   productId?: number;
-}) {
+};
+
+export function ProductFormButton({
+  type,
+  productValues,
+  productId,
+}: ProductFormButtonProps) {
+  const windowSize = useWindowSize();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
@@ -350,8 +355,8 @@ export function ProductFormButton({
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger asChild>
         {type === 'new' ? (
           <Button variant="default">
             <Plus className="mr-2 h-4 w-4" />
@@ -360,24 +365,28 @@ export function ProductFormButton({
         ) : (
           <Button variant="secondary">Edit</Button>
         )}
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-2xl">
-        <DialogHeader>
-          <DialogTitle>Produk Baru</DialogTitle>
-          <DialogDescription>
+      </SheetTrigger>
+      <SheetContent
+        className="h-full sm:max-w-2xl"
+        side={windowSize.width! > 768 ? 'right' : 'bottom'}
+      >
+        <SheetHeader>
+          <SheetTitle>Produk Baru</SheetTitle>
+          <SheetDescription>
             Buat produk baru untuk ditampilkan di toko kamu.
-          </DialogDescription>
-        </DialogHeader>
+          </SheetDescription>
+          <Separator />
+        </SheetHeader>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="grid grid-cols-3 gap-4"
+            className="mt-4 grid grid-cols-3 gap-4"
           >
             <FormField
               control={form.control}
               name="nama"
               render={({ field }) => (
-                <FormItem className="col-span-2">
+                <FormItem className="col-span-3 md:col-span-2">
                   <FormLabel>Nama Produk</FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -429,7 +438,7 @@ export function ProductFormButton({
               control={form.control}
               name="jenis"
               render={({ field }) => (
-                <FormItem className="col-span-2">
+                <FormItem className="col-span-3 md:col-span-2">
                   <FormLabel>Jenis</FormLabel>
                   <FormControl>
                     <Select
@@ -491,12 +500,12 @@ export function ProductFormButton({
                 </FormItem>
               )}
             />
-            <DialogFooter className="col-start-3">
+            <SheetFooter className="col-start-3 items-end">
               <Button type="submit">Simpan</Button>
-            </DialogFooter>
+            </SheetFooter>
           </form>
         </Form>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   );
 }
