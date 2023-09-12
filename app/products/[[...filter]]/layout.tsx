@@ -1,6 +1,5 @@
 import Authenticated from '@/components/authenticated';
 import SidebarProduct from '@/components/products/sidebar-product';
-import { Separator } from '@/components/ui/separator';
 
 export default function ProductsLayout({
   children,
