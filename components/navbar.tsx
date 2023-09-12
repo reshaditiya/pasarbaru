@@ -18,7 +18,7 @@ export default async function Navbar() {
       <MobileNav />
       <div className="hidden md:flex md:items-center">
         <Link href="/" className="flex items-center space-x-2">
-          <ShoppingBag className="h-5 w-5" strokeWidth={2.5} />
+          <ShoppingBag className="h-5 w-5" />
           <span className="font-bold sm:inline-block">{siteConfig.name}</span>
         </Link>
         <NavbarItem className="ml-8" />
