@@ -30,7 +30,7 @@ export default async function Page({
   if (products.data?.length === 0)
     return (
       <EmptyState
-        className="mt-32 w-3/4 text-muted-foreground lg:my-auto"
+        className="mx-auto mt-32 w-3/4 text-muted-foreground lg:my-auto"
         title="Produk Kosong!"
         description="Tidak ada produk yang tersedia silahkan menambahkan produk untuk menampilkannya."
       />
