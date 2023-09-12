@@ -29,7 +29,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Popover,
   PopoverContent,
@@ -41,11 +41,6 @@ const FilterSchema = z.object({
   jenis: z.string(),
   keyword: z.string().optional(),
 });
-
-const defaultValues: Partial<FilterValues> = {
-  jenis: 'all',
-  keyword: '',
-};
 
 type FilterValues = z.infer<typeof FilterSchema>;
 
@@ -77,6 +72,12 @@ export function FilterFormPopover(
 
 export function FilterFormCard(props: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter();
+  const pathname = usePathname();
+  const defaultValues: Partial<FilterValues> = {
+    jenis: decodeURIComponent(pathname.split('/')[2] ?? 'all'),
+    keyword: decodeURIComponent(pathname.split('/')[3] ?? ''),
+  };
+
   const form = useForm<FilterValues>({
     resolver: zodResolver(FilterSchema),
     defaultValues,
@@ -109,11 +110,7 @@ export function FilterFormCard(props: React.HTMLAttributes<HTMLDivElement>) {
                 <FormItem className="col-span-2">
                   <FormLabel>Jenis</FormLabel>
                   <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      value={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger>
                         <SelectValue placeholder="Pilih jenis produk" />
                       </SelectTrigger>
@@ -146,9 +143,12 @@ export function FilterFormCard(props: React.HTMLAttributes<HTMLDivElement>) {
             />
           </CardContent>
           <CardFooter className="flex justify-end gap-2">
-            <Button variant="ghost" size="icon" onClick={handleReset}>
-              <RotateCcw className="h-4 w-4" />
-            </Button>
+            {(form.getValues('jenis') !== 'all' ||
+              form.getValues('keyword') !== '') && (
+              <Button variant="ghost" size="icon" onClick={handleReset}>
+                <RotateCcw className="h-4 w-4" />
+              </Button>
+            )}
             <Button variant="secondary" type="submit">
               Terapkan
             </Button>
