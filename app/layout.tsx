@@ -25,10 +25,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} mx-auto max-w-7xl`}>
-        {session && <Navbar />}
-        {children}
-        <Toaster />
+      <body className={inter.className}>
+        <main className="mx-auto max-w-[100rem]">
+          {session && <Navbar />}
+          {children}
+          <Toaster />
+        </main>
       </body>
     </html>
   );
