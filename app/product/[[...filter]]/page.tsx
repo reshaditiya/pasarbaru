@@ -5,11 +5,14 @@ import ProductCard from '@/components/product/product-card';
 import EmptyState from '@/components/empty-state';
 
 export default async function Page({
-  params,
+  searchParams,
 }: {
-  params: { filter: string[] };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const [filterJenis, filterKeyword] = params.filter ?? [];
+  const [filterJenis, filterKeyword] = [
+    searchParams.jenis,
+    searchParams.keyword,
+  ];
   const supabase = createServerComponentClient<Database>({ cookies });
   const user = await supabase.auth.getUser();
   const queryProducts = supabase
@@ -21,7 +24,7 @@ export default async function Page({
     .order('created_at', { ascending: true });
 
   if (filterJenis && filterJenis !== 'all')
-    queryProducts.eq('jenis', decodeURI(filterJenis));
+    queryProducts.eq('jenis', filterJenis);
   if (filterKeyword) queryProducts.ilike('nama', `%${filterKeyword}%`);
 
   const products = await queryProducts;

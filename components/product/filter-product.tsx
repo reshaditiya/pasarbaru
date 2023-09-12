@@ -29,7 +29,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import { usePathname, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import {
   Popover,
   PopoverContent,
@@ -72,10 +72,11 @@ export function FilterFormPopover(
 
 export function FilterFormCard(props: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const pathname = usePathname();
   const defaultValues: Partial<FilterValues> = {
-    jenis: decodeURIComponent(pathname.split('/')[2] ?? 'all'),
-    keyword: decodeURIComponent(pathname.split('/')[3] ?? ''),
+    jenis: searchParams.get('jenis') ?? 'all',
+    keyword: searchParams.get('keyword') ?? '',
   };
 
   const form = useForm<FilterValues>({
@@ -85,13 +86,18 @@ export function FilterFormCard(props: React.HTMLAttributes<HTMLDivElement>) {
   });
 
   function onSubmit(data: FilterValues) {
-    router.push(`/products/${data.jenis ?? 'all'}/${data.keyword ?? ''}`);
+    const searchParams = new URLSearchParams({
+      jenis: data.jenis,
+      keyword: data.keyword ?? '',
+    });
+    const queryString = '?' + searchParams.toString();
+    router.replace(queryString, { scroll: false });
   }
 
   function handleReset(e: any) {
     e.preventDefault();
     form.reset();
-    router.push('/products');
+    router.replace(pathname);
   }
 
   return (
