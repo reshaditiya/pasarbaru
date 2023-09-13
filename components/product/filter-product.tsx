@@ -149,8 +149,7 @@ export function FilterFormCard(props: React.HTMLAttributes<HTMLDivElement>) {
             />
           </CardContent>
           <CardFooter className="flex justify-end gap-2">
-            {(form.getValues('jenis') !== 'all' ||
-              form.getValues('keyword') !== '') && (
+            {searchParams.size > 0 && (
               <Button variant="ghost" size="icon" onClick={handleReset}>
                 <RotateCcw className="h-4 w-4" />
               </Button>
