@@ -87,8 +87,6 @@ export function FilterFormCard(props: React.HTMLAttributes<HTMLDivElement>) {
     router.push('/suplier');
   }
 
-  console.log(searchParams);
-
   return (
     <Card {...props}>
       <CardHeader>
