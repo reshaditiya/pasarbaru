@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Sheet,
   SheetContent,
@@ -11,10 +13,19 @@ import Link from 'next/link';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import { NavbarItem } from './navbar-item';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function MobileNav({ className }: { className?: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger className="md:hidden" asChild>
         <Button size="icon" variant="outline">
           <AlignLeft className="h-5 w-5" />
