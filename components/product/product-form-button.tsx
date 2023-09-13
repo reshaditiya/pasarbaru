@@ -44,6 +44,7 @@ import { Database } from '@/types/supabase';
 import { Plus } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { useWindowSize } from '@uidotdev/usehooks';
+import { ScrollArea } from '../ui/scroll-area';
 
 const newProductSchema = z.object({
   nama: z
@@ -367,144 +368,157 @@ export function ProductFormButton({
         )}
       </SheetTrigger>
       <SheetContent
-        className="h-full sm:max-w-2xl"
+        className="h-full md:min-w-max"
         side={windowSize.width! > 768 ? 'right' : 'bottom'}
       >
-        <SheetHeader>
-          <SheetTitle>Produk Baru</SheetTitle>
-          <SheetDescription>
-            Buat produk baru untuk ditampilkan di toko kamu.
-          </SheetDescription>
-          <Separator />
-        </SheetHeader>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="mt-4 grid grid-cols-3 gap-4"
-          >
-            <FormField
-              control={form.control}
-              name="nama"
-              render={({ field }) => (
-                <FormItem className="col-span-3 md:col-span-2">
-                  <FormLabel>Nama Produk</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="foto1"
-              render={({ field }) => (
-                <FormItem className="col-start-1">
-                  <FormLabel>Foto 1</FormLabel>
-                  <FormControl>
-                    <InputImg id="foto1" field={field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="foto2"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Foto 2</FormLabel>
-                  <FormControl>
-                    <InputImg id="foto2" field={field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="foto3"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Foto 3</FormLabel>
-                  <FormControl>
-                    <InputImg id="foto3" field={field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="jenis"
-              render={({ field }) => (
-                <FormItem className="col-span-3 md:col-span-2">
-                  <FormLabel>Jenis</FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Pilih jenis produk" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {jenis.map((jn) => (
-                          <SelectItem key={jn} value={jn}>
-                            {jn}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="harga_beli"
-              render={({ field }) => (
-                <FormItem className="col-start-1">
-                  <FormLabel>Harga Beli</FormLabel>
-                  <FormControl>
-                    <Input {...field} type="number" className="text-right" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="harga_jual"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Harga Jual</FormLabel>
-                  <FormControl>
-                    <Input {...field} type="number" className="text-right" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="satuan"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Satuan</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <SheetFooter className="col-start-3 items-end">
-              <Button type="submit">Simpan</Button>
-            </SheetFooter>
-          </form>
-        </Form>
+        <ScrollArea className="h-full">
+          {/* scroll area safe container */}
+          <div className="px-4">
+            <SheetHeader>
+              <SheetTitle>Produk Baru</SheetTitle>
+              <SheetDescription>
+                Buat produk baru untuk ditampilkan di toko kamu.
+              </SheetDescription>
+              <Separator />
+            </SheetHeader>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="mt-4 grid grid-cols-3 gap-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="nama"
+                  render={({ field }) => (
+                    <FormItem className="col-span-3 md:col-span-2">
+                      <FormLabel>Nama Produk</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="foto1"
+                  render={({ field }) => (
+                    <FormItem className="col-start-1">
+                      <FormLabel>Foto 1</FormLabel>
+                      <FormControl>
+                        <InputImg id="foto1" field={field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="foto2"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Foto 2</FormLabel>
+                      <FormControl>
+                        <InputImg id="foto2" field={field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="foto3"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Foto 3</FormLabel>
+                      <FormControl>
+                        <InputImg id="foto3" field={field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="jenis"
+                  render={({ field }) => (
+                    <FormItem className="col-span-3 md:col-span-2">
+                      <FormLabel>Jenis</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Pilih jenis produk" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {jenis.map((jn) => (
+                              <SelectItem key={jn} value={jn}>
+                                {jn}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="harga_beli"
+                  render={({ field }) => (
+                    <FormItem className="col-start-1">
+                      <FormLabel>Harga Beli</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="number"
+                          className="text-right"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="harga_jual"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Harga Jual</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="number"
+                          className="text-right"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="satuan"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Satuan</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <SheetFooter className="col-start-3 items-end">
+                  <Button type="submit">Simpan</Button>
+                </SheetFooter>
+              </form>
+            </Form>
+          </div>
+        </ScrollArea>
       </SheetContent>
     </Sheet>
   );
