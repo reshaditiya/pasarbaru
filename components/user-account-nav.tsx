@@ -52,13 +52,13 @@ export default async function UserAccountNav({
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
+        <DropdownMenuItem>
           <Link href="/account-info" className="cursor-pointer">
             Pengaturan
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
+        <DropdownMenuItem>
           <LogoutButton className="w-full cursor-pointer bg-destructive/10 text-destructive hover:bg-destructive/20" />
         </DropdownMenuItem>
       </DropdownMenuContent>
