@@ -1,11 +1,7 @@
 import Authenticated from '@/components/authenticated';
 import SidebarSuplier from '@/components/suplier/sidebar-suplier';
 
-export default function ProductsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <Authenticated>
       <div className="space-y-4 p-5 pb-16 md:p-10">
