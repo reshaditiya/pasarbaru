@@ -4,6 +4,8 @@ import { cookies } from 'next/headers';
 import type { Database } from '@/types/supabase';
 import OwnerForm from '@/components/account-info/owner-form';
 
+export const dynamic = 'force-dynamic';
+
 export default async function page() {
   const supabase = createServerComponentClient<Database>({ cookies });
   const user = await supabase.auth.getUser();

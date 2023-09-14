@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation';
 import type { Database } from '@/types/supabase';
 import SigninForm from '@/components/auth/signin-form';
 
+export const dynamic = 'force-dynamic';
+
 export default async function page() {
   const supabase = createServerComponentClient<Database>({ cookies });
   const {

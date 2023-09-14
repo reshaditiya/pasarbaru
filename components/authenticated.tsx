@@ -3,6 +3,8 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import type { Database } from '@/types/supabase';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Authenticated({
   children,
 }: {
