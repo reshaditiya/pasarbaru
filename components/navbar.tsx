@@ -9,6 +9,8 @@ import { Button } from './ui/button';
 import { ShoppingBag } from 'lucide-react';
 import MobileNav from './mobile-nav';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Navbar() {
   const supabase = createServerComponentClient({ cookies });
   const session = await supabase.auth.getSession();

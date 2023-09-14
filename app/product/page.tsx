@@ -4,6 +4,8 @@ import type { Database } from '@/types/supabase';
 import ProductCard from '@/components/product/product-card';
 import EmptyState from '@/components/empty-state';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page({
   searchParams,
 }: {

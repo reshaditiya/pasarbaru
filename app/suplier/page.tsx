@@ -4,6 +4,8 @@ import { SuplierCard } from '@/components/suplier/suplier-card';
 import type { Database } from '@/types/supabase';
 import EmptyState from '@/components/empty-state';
 
+export const dynamic = 'force-dynamic';
+
 export default async function page({
   searchParams,
 }: {

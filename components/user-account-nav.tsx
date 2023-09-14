@@ -13,6 +13,8 @@ import { User } from 'lucide-react';
 import { cookies } from 'next/headers';
 import LogoutButton from './logout-button';
 
+export const dynamic = 'force-dynamic';
+
 export default async function UserAccountNav({
   className,
 }: {
