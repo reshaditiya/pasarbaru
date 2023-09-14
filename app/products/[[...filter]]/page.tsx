@@ -3,7 +3,6 @@ import { cookies } from 'next/headers';
 import type { Database } from '@/types/supabase';
 import ProductCard from '@/components/product/product-card';
 import EmptyState from '@/components/empty-state';
-import { ProductFormButton } from '@/components/product/product-form-button';
 
 export default async function Page({
   params,
