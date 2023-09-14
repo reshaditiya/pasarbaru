@@ -30,7 +30,7 @@ export function SuplierCard({
   const { id: suplierId, ...suplierValues } = suplier;
 
   return (
-    <Card className="w-full">
+    <Card className="flex w-full flex-col">
       <CardHeader className="flex-row flex-wrap items-center gap-4">
         <Avatar className="inline-block h-10 w-10 overflow-hidden rounded-full">
           <AvatarImage src={suplier?.foto ?? ''} alt={suplier?.nama ?? ''} />
@@ -53,7 +53,7 @@ export function SuplierCard({
           <div>{suplier?.alamat}</div>
         </div>
       </CardContent>
-      <CardFooter className="flex flex-wrap justify-end gap-4">
+      <CardFooter className="flex flex-1 flex-wrap items-end justify-end gap-4">
         <DeleteSuplierButton
           suplierId={suplierId}
           suplierName={suplierValues.nama}
